@@ -24,6 +24,7 @@ for (const img of oneProductImgsSrc) {
   const gallery = document.getElementById("gallery-photos");
   li.querySelector("img").src = img.thumbsImg;
   li.querySelector("li").dataset.id = oneProductImgsSrc.indexOf(img);
+  li.querySelector("img").dataset.id = oneProductImgsSrc.indexOf(img);
   gallery.appendChild(li);
 }
 
@@ -34,7 +35,7 @@ let currentImg = document.querySelector("#gallery img");
 let rank = parseInt(currentImg.dataset.id);
 
 // next btn
-nextBtn.addEventListener("click", function (event) {
+nextBtn.addEventListener("click", () => {
   if (
     rank >= oneProductImgsSrc.length - 1 &&
     oneProductImgsSrc[rank] !== undefined
@@ -46,10 +47,21 @@ nextBtn.addEventListener("click", function (event) {
 });
 
 // previous btn
-previousBtn.addEventListener("click", function (event) {
+previousBtn.addEventListener("click", () => {
   if (rank <= 0) {
     rank = oneProductImgsSrc.length;
   }
   rank--;
   currentImg.src = oneProductImgsSrc[rank].picturesImg;
+});
+
+galleryPhotos.addEventListener("pointerover", function (event) {
+    // const isImg = event.target.nodeName === "IMG";
+    if (event.target.nodeName !== "IMG") {
+        return;
+    }
+    console.log(event.target.dataset.id);
+    currentImg.src = oneProductImgsSrc[event.target.dataset.id].picturesImg;
+    console.log("yes")
+
 });
