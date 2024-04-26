@@ -55,13 +55,33 @@ previousBtn.addEventListener("click", () => {
   currentImg.src = oneProductImgsSrc[rank].picturesImg;
 });
 
+// hover products image
 galleryPhotos.addEventListener("pointerover", function (event) {
-    // const isImg = event.target.nodeName === "IMG";
-    if (event.target.nodeName !== "IMG") {
-        return;
-    }
-    console.log(event.target.dataset.id);
-    currentImg.src = oneProductImgsSrc[event.target.dataset.id].picturesImg;
-    console.log("yes")
+  // const isImg = event.target.nodeName === "IMG";
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+  console.log(event.target.dataset.id);
+  currentImg.src = oneProductImgsSrc[event.target.dataset.id].picturesImg;
+  console.log("yes");
+});
 
+//add products to cart
+const addToCartBtn = document.querySelector(".js-add-cta");
+const addToCartQtn = document.querySelector(".js-add-qty");
+
+let Clicked = false;
+
+addToCartBtn.addEventListener("click", function (event) {
+  if (addToCartQtn.value > 99) {
+    document.querySelector(".js-cart-nb").innerText = "99+";
+    return addToCartQtn.value;
+  }
+  document.querySelector(".js-cart-nb").innerText = addToCartQtn.value;
+  if (!Clicked) {
+    Clicked = true;
+    console.log("true");
+  } else {
+    addToCartBtn.innerText = "Déjà au panier";
+  }
 });
