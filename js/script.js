@@ -17,46 +17,39 @@ const oneProductImgsSrc = [
   },
 ];
 
-
 //show list of imags
-let i = 0;
 for (const img of oneProductImgsSrc) {
   const imgsTemplate = document.getElementById("gallery-template");
   const li = document.importNode(imgsTemplate.content, true);
-
   const gallery = document.getElementById("gallery-photos");
   li.querySelector("img").src = img.thumbsImg;
-  li.querySelector("li").dataset.id = i;
+  li.querySelector("li").dataset.id = oneProductImgsSrc.indexOf(img);
   gallery.appendChild(li);
-  i++;
-  console.log(li.querySelector("li"));
 }
-
 
 const previousBtn = document.querySelector("#gallery .js-pictures-prev");
 const nextBtn = document.querySelector("#gallery .js-pictures-next");
 const galleryPhotos = document.getElementById("gallery-photos");
-let currentImgSrc = document
-  .querySelector("#gallery img")
-  .getAttribute("src")
-  .slice(0, -6);
+let currentImg = document.querySelector("#gallery img");
+let rank = parseInt(currentImg.dataset.id);
 
-// console.log(currentImgSrc);
-// console.log(galleryPhotos.children);
-// for (const li of galleryPhotos.children) {
-//   // li.children.src = "go";
-//   console.log(li.children[0].getAttribute("src").slice(0, -6));
-//   if (li.children[0].getAttribute("src") == currentImgSrc) {
-//     console.log("ok");
-//   } else {
-//     console.log("no");
-//   }
-// }
-
-previousBtn.addEventListener("click", function (event) {
-  console.log(event);
+// next btn
+nextBtn.addEventListener("click", function (event) {
+  if (
+    rank >= oneProductImgsSrc.length - 1 &&
+    oneProductImgsSrc[rank] !== undefined
+  ) {
+    rank = 0;
+  }
+  rank++;
+  currentImg.src = oneProductImgsSrc[rank].picturesImg;
 });
 
-nextBtn.addEventListener("click", function (event) {
-  console.log(event);
+// previous btn
+previousBtn.addEventListener("click", function (event) {
+  if (rank <= 0) {
+    rank = oneProductImgsSrc.length;
+  }
+  rank--;
+  currentImg.src = oneProductImgsSrc[rank].picturesImg;
 });
