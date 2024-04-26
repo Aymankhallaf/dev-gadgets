@@ -6,16 +6,29 @@ const oneProductImgsSrc = [
   {
     thumbsImg: "img/canard-jaune-2-s.png",
     picturesImg: "img/canard-jaune-2-l.png",
-  },
-  {
+},
+{
     thumbsImg: "img/canard-jaune-3-s.png",
     picturesImg: "img/canard-jaune-3-l.png",
-  },
-  {
+},
+{
     thumbsImg: "img/canard-jaune-4-s.png",
     picturesImg: "img/canard-jaune-4-l.png",
-  },
+},
 ];
+
+/**
+ * toggel function
+ * @param {string} toggleId an id text ex(#features)
+ * @param {string} hiddenMenuClass a class text ex(.menu)
+ */
+function toggle(toggleId, hiddenMenuClass) {
+  const btn = document.querySelector(toggleId);
+  btn.addEventListener("click", function (event) {
+    btn.classList.toggle("closed");
+    document.querySelector(hiddenMenuClass).classList.toggle("text-hidden");
+  });
+}
 
 //show list of imags
 for (const img of oneProductImgsSrc) {
@@ -80,8 +93,28 @@ addToCartBtn.addEventListener("click", function (event) {
   document.querySelector(".js-cart-nb").innerText = addToCartQtn.value;
   if (!Clicked) {
     Clicked = true;
-    console.log("true");
   } else {
     addToCartBtn.innerText = "Déjà au panier";
+    addToCartBtn.classList.toggle("add-cta--disactive");
   }
 });
+
+// toggle
+
+
+toggle("#avantages", ".js-product-advantages");
+toggle("#features", ".js-product-car");
+
+// const features = document.getElementById("features");
+// features.addEventListener("click", function (event) {
+//   features.classList.toggle("closed");
+//   document.querySelector(".js-product-car").classList.toggle("text-hidden");
+// });
+
+
+// const advantages = document.getElementById("avantages");
+// advantages.addEventListener("click", function (event) {
+//     advantages.classList.toggle("closed");
+//     document.querySelector(".js-product-advantages").classList.toggle("text-hidden");
+//   });
+  
